@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>خبزة وشاورما | Khobzeh W Shawerma</title>
+  <style>
+    :root {
+      --ink: #21130c;
+      --charcoal: #15110e;
+      --brown: #8d4a16;
+      --copper: #bd651f;
+      --gold: #f2b954;
+      --tomato: #d8442e;
+      --cream: #fff6e7;
+      --paper: #fffdf7;
+      --muted: #735b49;
+      --line: rgba(33, 19, 12, .13);
+      --shadow: 0 26px 70px rgba(33, 19, 12, .18);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(242, 185, 84, .24), transparent 28%),
+        linear-gradient(180deg, #fff9ee 0%, #f8ead5 42%, #fffaf0 100%);
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px clamp(18px, 5vw, 76px);
+      background: rgba(255, 246, 231, .88);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 245px;
+    }
+
+    .brand img {
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 10px 26px rgba(33, 19, 12, .12);
+    }
+
+    .brand strong,
+    .brand small { display: block; }
+
+    .brand strong {
+      font-size: 21px;
+      line-height: 1.1;
+    }
+
+    .brand small {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .11em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: #4d321f;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav a:hover { background: rgba(189, 101, 31, .12); }
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 87px);
+      display: grid;
+      grid-template-columns: minmax(300px, .92fr) minmax(280px, .78fr);
+      align-items: center;
+      gap: clamp(26px, 5vw, 70px);
+      padding: clamp(36px, 6vw, 84px) clamp(18px, 5vw, 76px);
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(21, 17, 14, .97) 0%, rgba(21, 17, 14, .92) 42%, rgba(141, 74, 22, .42) 100%),
+        url("assets/meal-box.jpg") center / cover no-repeat;
+      color: #fff7e9;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--tomato), var(--gold), #5d7039);
+    }
+
+    .hero-copy,
+    .hero-plate { position: relative; z-index: 1; }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 18px;
+      font-size: clamp(54px, 9vw, 122px);
+      line-height: .92;
+    }
+
+    .hero-copy p:not(.eyebrow) {
+      max-width: 650px;
+      margin-bottom: 26px;
+      color: rgba(255, 247, 233, .86);
+      font-size: clamp(18px, 2.2vw, 25px);
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 13px 22px;
+      border: 1px solid rgba(255, 255, 255, .22);
+      font-weight: 900;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn.primary { background: var(--gold); color: var(--ink); border-color: transparent; }
+    .btn.ghost { color: #fff7e9; background: rgba(255, 255, 255, .1); }
+
+    .hero-plate {
+      align-self: end;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transform: rotate(-2deg);
+      background: white;
+    }
+
+    .hero-plate img {
+      width: 100%;
+      aspect-ratio: 1.2 / 1;
+      object-fit: cover;
+    }
+
+    .quick-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--charcoal);
+      color: var(--paper);
+    }
+
+    .quick-strip div {
+      min-height: 112px;
+      padding: 28px clamp(18px, 5vw, 76px);
+      border-inline-start: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .quick-strip strong,
+    .quick-strip span { display: block; }
+
+    .quick-strip strong {
+      color: var(--gold);
+      margin-bottom: 6px;
+      font-size: 20px;
+    }
+
+    .quick-strip span {
+      color: rgba(255, 255, 255, .72);
+      line-height: 1.6;
+    }
+
+    section {
+      padding: clamp(48px, 7vw, 92px) clamp(18px, 5vw, 76px);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      margin-bottom: 0;
+      font-size: clamp(34px, 5vw, 68px);
+      line-height: 1;
+    }
+
+    .menu-section {
+      background:
+        linear-gradient(135deg, rgba(242, 185, 84, .18), transparent 46%),
+        var(--paper);
+    }
+
+    .menu-panel {
+      display: grid;
+      grid-template-columns: minmax(280px, .8fr) minmax(300px, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .menu-text,
+    .pdf-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .72);
+      box-shadow: 0 16px 42px rgba(33, 19, 12, .08);
+    }
+
+    .menu-text {
+      padding: clamp(24px, 4vw, 42px);
+    }
+
+    .menu-text h3 {
+      margin-bottom: 12px;
+      color: var(--brown);
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.2;
+    }
+
+    .menu-text p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.9;
+    }
+
+    .pdf-card {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .pdf-link {
+      position: relative;
+      min-height: 116px;
+      display: grid;
+      align-content: center;
+      gap: 8px;
+      overflow: hidden;
+      padding: 24px;
+      border-radius: 8px;
+      background: var(--charcoal);
+      color: var(--paper);
+    }
+
+    .pdf-link::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(216, 68, 46, .32), transparent 62%);
+      opacity: .9;
+    }
+
+    .pdf-link span,
+    .pdf-link strong,
+    .pdf-link small { position: relative; z-index: 1; }
+
+    .pdf-link span {
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .pdf-link strong {
+      font-size: clamp(24px, 3vw, 34px);
+    }
+
+    .pdf-link small {
+      color: rgba(255, 247, 233, .72);
+      font-size: 14px;
+    }
+
+    .pdf-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 44px rgba(33, 19, 12, .18);
+    }
+
+    .gallery {
+      background: #fff8ed;
+    }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr .75fr;
+      grid-auto-rows: 220px;
+      gap: 16px;
+    }
+
+    .food-shot {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 16px 42px rgba(33, 19, 12, .1);
+    }
+
+    .food-shot.large { grid-row: span 2; }
+
+    .food-shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .45s ease;
+    }
+
+    .food-shot:hover img { transform: scale(1.045); }
+
+    .food-shot span {
+      position: absolute;
+      inset-inline: 14px;
+      bottom: 14px;
+      width: fit-content;
+      max-width: calc(100% - 28px);
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(21, 17, 14, .82);
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .branches {
+      display: grid;
+      grid-template-columns: minmax(280px, .8fr) minmax(300px, 1fr);
+      gap: 18px;
+      background: var(--charcoal);
+      color: var(--paper);
+    }
+
+    .branches .section-head {
+      display: block;
+      margin: 0;
+    }
+
+    .branches p {
+      color: rgba(255, 247, 233, .72);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .branch-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .branch-card {
+      min-height: 230px;
+      padding: 26px;
+      border: 1px solid rgba(255, 255, 255, .13);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(242, 185, 84, .14), transparent 48%),
+        rgba(255, 255, 255, .06);
+    }
+
+    .branch-card h3 {
+      color: var(--gold);
+      font-size: 28px;
+    }
+
+    .branch-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .branch-card li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+      color: rgba(255, 247, 233, .85);
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 24px clamp(18px, 5vw, 76px);
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    footer a { color: var(--gold); font-weight: 900; }
+
+    @media (max-width: 940px) {
+      .hero,
+      .menu-panel,
+      .branches {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        background-position: 58% center;
+      }
+
+      .hero-plate {
+        max-width: 520px;
+        transform: none;
+      }
+
+      .food-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topbar {
+        position: static;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .brand { min-width: 0; }
+
+      .nav {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .nav a { padding-inline: 8px; }
+
+      .hero {
+        padding-top: 46px;
+      }
+
+      .hero-actions,
+      .quick-strip,
+      .food-grid,
+      .branch-list {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        display: grid;
+      }
+
+      .quick-strip {
+        display: grid;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .food-grid {
+        grid-auto-rows: 240px;
+      }
+
+      .food-shot.large { grid-row: span 1; }
+
+      footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="خبزة وشاورما">
+      <img src="assets/logo.jpg" alt="شعار خبزة وشاورما">
+      <span>
+        <strong>خبزة وشاورما</strong>
+        <small>KHOBZEH W SHAWERMA</small>
+      </span>
+    </a>
+    <nav class="nav" aria-label="روابط الموقع">
+      <a href="#menu">المنيو</a>
+      <a href="#gallery">الأصناف</a>
+      <a href="#branches">الفروع</a>
+      <a href="tel:+201559898831">اتصل بنا</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Fresh Bread · Shawerma · Sauces</p>
+        <h1>خبزة وشاورما</h1>
+        <p>
+          طعم الشاورما اللي بتحبه، بخبز طازج وصوصات بتخلي كل سندويشة إلها شخصية.
+          اختار فرعك من قسم المنيو وافتح ملف الـPDF مباشرة.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#menu">المنيو</a>
+          <a class="btn ghost" href="#gallery">بعض الأصناف</a>
+        </div>
+      </div>
+
+      <div class="hero-plate">
+        <img src="assets/sandwich-01.jpg" alt="ساندويشة شاورما داخل خبز طازج">
+      </div>
+    </section>
+
+    <section class="quick-strip" aria-label="مميزات">
+      <div>
+        <strong>خبز طازج</strong>
+        <span>شكل وطعم مميز لكل سندويشة.</span>
+      </div>
+      <div>
+        <strong>صوصات خاصة</strong>
+        <span>ثومية، حار، ومخللات بتكمل الطعم.</span>
+      </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">PDF Menu</p>
+          <h2>اختار الفرع</h2>
+        </div>
+      </div>
+
+      <div class="menu-panel">
+        <div class="menu-text">
+          <h3>يرجى اختيار الفرع لعرض المنيو</h3>
+          <p>
+            اضغط على فرع زهراء المعادي أو الشيخ زايد، وسيتم تحويل العميل مباشرة
+            إلى ملف المنيو الخاص بالفرع. استبدل الروابط داخل هذا الملف بروابط
+            الـPDF الحقيقية عند تجهيزها.
+          </p>
+        </div>
+
+        <div class="pdf-card" aria-label="روابط المنيو">
+          <!-- ملاحظة مهمة: ضع روابط ملفات المنيو PDF الحقيقية مكان PDF_LINK_ZAHRAA_ALMAADI و PDF_LINK_SHEIKH_ZAYED داخل href في الزرين التاليين -->
+          <a class="pdf-link" href="https://drive.google.com/file/d/1qTJQXIMXVL4i2l77piW-Kr2veKSf2U1-/view?usp=sharing" target="_blank" rel="noopener">
+            <span>Open PDF Menu</span>
+            <strong>فرع زهراء المعادي</strong>
+            <small>اضغط لفتح منيو الفرع</small>
+          </a>
+          <a class="pdf-link" href="https://drive.google.com/file/d/16jvgSY7mG4Ep4NUWLJrAoZErlBg08btJ/view?usp=sharing" target="_blank" rel="noopener">
+            <span>Open PDF Menu</span>
+            <strong>فرع الشيخ زايد</strong>
+            <small>اضغط لفتح منيو الفرع</small>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Our Food</p>
+          <h2>بعض الأصناف</h2>
+        </div>
+      </div>
+
+      <div class="food-grid">
+        <figure class="food-shot large">
+          <img src="assets/meal-box.jpg" alt="وجبة شاورما مع بطاطا وصوصات">
+        </figure>
+        <figure class="food-shot">
+          <img src="assets/wrap-01.jpg" alt="راب شاورما مغلف بورق المطعم">
+        </figure>
+        <figure class="food-shot">
+          <img src="assets/wrap-02.jpg" alt="راب شاورما دجاج">
+        </figure>
+        <figure class="food-shot">
+          <img src="assets/sandwich-02.jpg" alt="خبز محشي شاورما وصوص">
+        </figure>
+        <figure class="food-shot">
+          <img src="assets/sandwich-01.jpg" alt="شاورما دجاج داخل خبز">
+        </figure>
+      </div>
+    </section>
+
+    <section class="branches" id="branches">
+      <div class="section-head">
+        <p class="eyebrow">Branches</p>
+        <h2>فروعنا</h2>
+      </div>
+
+      <div class="branch-list">
+        <article class="branch-card">
+          <h3>مصر</h3>
+          <ul>
+            <li>زهراء المعادي</li>
+            <li>الشيخ زايد</li>
+          </ul>
+        </article>
+        <article class="branch-card">
+          <h3>الأردن</h3>
+          <ul>
+            <li>شارع المدينة المنورة</li>
+            <li>شارع مكة</li>
+            <li>الرابية</li>
+            <li>الصويفية</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>KHOBZEH W SHAWERMA</span>
+    <a href="tel:+201559898831">+20 155 989 8831</a>
+  </footer>
+</body>
+</html>
