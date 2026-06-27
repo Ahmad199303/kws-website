@@ -100,7 +100,7 @@
       position: relative;
       min-height: calc(100vh - 87px);
       display: grid;
-      grid-template-columns: minmax(300px, .92fr) minmax(280px, .78fr);
+      grid-template-columns: minmax(300px, 1fr);
       align-items: center;
       gap: clamp(26px, 5vw, 70px);
       padding: clamp(36px, 6vw, 84px) clamp(18px, 5vw, 76px);
@@ -120,8 +120,7 @@
       background: linear-gradient(90deg, var(--tomato), var(--gold), #5d7039);
     }
 
-    .hero-copy,
-    .hero-plate { position: relative; z-index: 1; }
+    .hero-copy { position: relative; z-index: 1; }
 
     .eyebrow {
       margin: 0 0 12px;
@@ -170,21 +169,6 @@
     .btn:hover { transform: translateY(-2px); }
     .btn.primary { background: var(--gold); color: var(--ink); border-color: transparent; }
     .btn.ghost { color: #fff7e9; background: rgba(255, 255, 255, .1); }
-
-    .hero-plate {
-      align-self: end;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transform: rotate(-2deg);
-      background: white;
-    }
-
-    .hero-plate img {
-      width: 100%;
-      aspect-ratio: 1.2 / 1;
-      object-fit: cover;
-    }
 
     .quick-strip {
       display: grid;
@@ -442,11 +426,6 @@
         background-position: 58% center;
       }
 
-      .hero-plate {
-        max-width: 520px;
-        transform: none;
-      }
-
       .food-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -535,10 +514,6 @@
           <a class="btn ghost" href="#gallery">بعض الأصناف</a>
         </div>
       </div>
-
-      <div class="hero-plate">
-        <img src="assets/sandwich-01.jpg" alt="ساندويشة شاورما داخل خبز طازج">
-      </div>
     </section>
 
     <section class="quick-strip" aria-label="مميزات">
@@ -564,9 +539,8 @@
         <div class="menu-text">
           <h3>يرجى اختيار الفرع لعرض المنيو</h3>
           <p>
-            اضغط على فرع زهراء المعادي أو الشيخ زايد، وسيتم تحويل العميل مباشرة
-            إلى ملف المنيو الخاص بالفرع. استبدل الروابط داخل هذا الملف بروابط
-            الـPDF الحقيقية عند تجهيزها.
+            اضغط على فرع زهراء المعادي أو الشيخ زايد، وسيتم تحويلك مباشرة
+            إلى المنيو الخاص بالفرع
           </p>
         </div>
 
